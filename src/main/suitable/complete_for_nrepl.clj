@@ -209,7 +209,7 @@
   special handling here."
   [{:keys [session] :as msg}]
   (require 'shadow.cljs.devtools.api)
-  (let [build-id :app
+  (let [build-id (:shadow.cljs.devtools.server.nrepl-impl/build-id msg)
         cljs-eval-fn (fn [ns code] (let [result ((resolve 'shadow.cljs.devtools.api/cljs-eval) :app code {})
                                          err (:err result)]
                                       {:error (when (not (empty? err)) err)
