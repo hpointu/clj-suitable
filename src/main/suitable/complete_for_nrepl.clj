@@ -210,7 +210,7 @@
   [{:keys [session] :as msg}]
   (require 'shadow.cljs.devtools.api)
   (let [build-id (:shadow.cljs.devtools.server.nrepl-impl/build-id msg)
-        cljs-eval-fn (fn [ns code] (let [result ((resolve 'shadow.cljs.devtools.api/cljs-eval) :app code {})
+        cljs-eval-fn (fn [ns code] (let [result ((resolve 'shadow.cljs.devtools.api/cljs-eval) build-id code {})
                                          err (:err result)]
                                       {:error (when (not (empty? err)) err)
                                        :value (some->> result :results last edn/read-string)}))
